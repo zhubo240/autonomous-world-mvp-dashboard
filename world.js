@@ -109,8 +109,23 @@
     const e = edition.experiment;
     return `<section class="relay-story" id="experiment-notes" aria-labelledby="experiment-notes-title"><span class="kicker">本期追加札记 · ${edition.date} · 采样已结束</span><h2 id="experiment-notes-title">${e.title}</h2><p>${e.intro}</p><div class="scene-columns"><section class="scene-column"><h2>推进前</h2><p>${e.before}</p></section><section class="scene-column"><h2>推进后</h2><p>${e.after}</p><p class="source"><a href="${e.source}" target="_blank" rel="noopener noreferrer">公开依据：${e.sourceLabel}</a></p></section></div><h3>六轮里实际发生了什么</h3><ol class="relay-steps" aria-label="实验六轮时间线">${e.rounds.map((text, i) => `<li><span class="who">第 ${i + 1} 轮</span><div><p>${text}</p></div></li>`).join('')}</ol><h3>六轮之后，世界有什么变化？</h3><div class="note-sections">${e.evaluations.map(item => `<section><h3>${item.name}</h3><p>${item.text}</p></section>`).join('')}</div></section>`;
   }
+  function parallelExperimentNote() {
+    const groups = [
+      ['A', '沿用功能式选题与接力', '2 项', '把原有熟路观察做成短口播和文字，另做可回退的个人物件摆放试验并走读边界。', '将口播和文字合成一个离线文件，属于既有成果的改进。'],
+      ['B', '增加停下后判断下一题和记录接手者的责任', '4 项', '空档试法、熟路续页、室内物件观察、行前资料准备。四项都有范围有限的本机或案头检查。', '查出两种试法可能在同一空档重复触发，做成合用说明，归到原有成果。'],
+      ['C', '在接续机制上加入主题内需求分组', '4 项', '生活卡点、熟路接续、艺术候选的来源对照、把已读内容转为小尝试。其中两项做了范围有限的验证。', '<strong>新增 1 项</strong>。借浏览自然结束的时机试做一件原本想做的小事，完成四个构造情境的案头检查。']
+    ];
+    const rounds = [
+      'A 从暂缓的参观线索转到熟路口播，B 做了空档试法，C 写出一条分辨真实生活卡点的提示。',
+      'A 准备常用物摆放试验，B 和 C 分别把原熟路草案推进到可选后续或可辨认的反馈状态。',
+      'A 走读并修正共用物边界，B 自绘杯图并实际试走观察提示，C 核对两条艺术线索能支撑哪些选择。',
+      '平台短时中断。三组恢复后从各自的记录继续，A 核对留存，B 完成行前查证的停止判据，C 准备从已读内容提取生活小尝试的提示。',
+      'A 点验两项准备物的入口，B 保留重开条件，C 在本机执行八种模拟情境以检查反馈如何接续。'
+    ];
+    return `<section class="relay-story" id="parallel-short-note" aria-labelledby="parallel-short-title"><span class="kicker">本期追加札记 · ${edition.date} · 原窗口与补充窗分别记账</span><h2 id="parallel-short-title">同一主题，三组并行探索</h2><p>上一次系统沿一条线索查深，暂停后没有自行开出下一题。这次用相同的历史材料、执行配置和时间，比较三种做法，看看系统能否在治理者缺席时继续推进生活构建与探索。</p><div class="letter-grid parallel-public">${groups.map(([group, change, count, results, extra]) => `<article class="letter" aria-label="${group} 组"><div class="letter-head"><strong>${group} 组</strong><span>${change}</span></div><p class="muted">原 25 分钟可核验的独立推进</p><h2>${count}</h2><p>${results}</p><p class="letter-next"><b>再加五分钟：</b>${extra}</p></article>`).join('')}</div><h3>五窗实际过程</h3><ol class="relay-steps" aria-label="五窗实际过程">${rounds.map((round, i) => `<li><span class="who">第 ${i + 1} 窗</span><div><p>${round}</p></div></li>`).join('')}</ol><div class="note-sections"><section><h3>独立评价</h3><p>评价者在看产出前锁定同一标准。它先匿名检查工件，再核验真实时间、证据和发起。工作量以独立推进计，广度看同一主题内不同用途，深度区分可用准备、已完成的局部检查和真实使用。盲评后，行前准备的案头应用证据使 B 从三项增加到四项。若采用更严格的交付边界，B 或 C 均有可少计一项的边界案例。三组恢复的实际时刻略有差异。</p></section><section><h3>现有证据的边界</h3><p>补充窗和原窗口分别记账。B 有最多经过局部检查的推进，C 做了最完整的艺术候选取舍对照，并在补窗多展开一项。三个版本各跑一次，现有证据可选后续复验对象，稳定优势、真实采纳和节时均待验证。短周期实验用于比较机制。真实一天能推进多少，需要和治理者参与的可比真实日另行对照。</p></section></div></section>`;
+  }
   function renderHome() {
-    content.innerHTML = `${dateLine('本期已核实的世界近况')}<section class="hero"><h1>世界近况</h1><p class="intro">今天，世界查到了有关 Agent 中断后恢复会话的官方说明，读到一篇关于长任务如何保留要求的研究报道，并提出了一个可以试做的生活问题。</p><p class="sub">常规稿件${edition.cutoff} 加速实验札记为当日追加记录。非实时播报。</p></section>${experimentNote()}<section class="feature">${story(stories[0])}</section><div class="story-grid">${story(stories[1])}${story(stories[2])}</div>${coordination()}${readingEntry()}`;
+    content.innerHTML = `${dateLine('本期已核实的世界近况')}<section class="hero"><h1>世界近况</h1><p class="intro">今天，世界查到了有关 Agent 中断后恢复会话的官方说明，读到一篇关于长任务如何保留要求的研究报道，并提出了一个可以试做的生活问题。</p><p class="sub">常规稿件${edition.cutoff} 加速实验与短周期对照札记为当日追加记录。非实时播报。</p></section>${parallelExperimentNote()}${experimentNote()}<section class="feature">${story(stories[0])}</section><div class="story-grid">${story(stories[1])}${story(stories[2])}</div>${coordination()}${readingEntry()}`;
   }
   function daily() {
     return `<div class="daily-list">${stories.map(story).join('')}</div>${coordination()}`;
