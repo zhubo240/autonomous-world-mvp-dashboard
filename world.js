@@ -7,31 +7,31 @@
     stories: [
       {
         id: 'recover', domain: '工程探索', role: '外部信号系统',
-        title: '中断之后，Agent 能不能回到原来的工作？',
-        deck: '世界找到一条关于持续工作的具体线索：终端消失，不一定等于任务的上下文也消失。',
-        discovery: '外部信号系统核对 Orca v1.4.272 发布说明。官方称，开启 Resume work on restart 后，即使原终端已丢失，终端 worker 仍可以回到保存的会话。',
-        why: '几个 Agent 各自做事时，中断后找得回原来做了什么、还差什么，比能启动更多 Agent 更值得关注。',
-        boundary: '回到会话也不等于任务已正确完成。',
-        next: '已查官方说明，建议程序员在隔离环境中验证能否接续同一测试任务；本地试跑待进行。',
-        question: 'Agent 失去终端之后，工作的连续性还能保留多少？',
+        title: '终端丢了，Agent 还能接着工作吗？',
+        deck: '几个 Agent 并行做事时，中断后能不能接上原来的工作很重要。',
+        discovery: '外部信号系统核对了 Orca v1.4.272 的发布说明。官方称，开启 Resume work on restart 后，终端 worker 即使丢了原终端，也能回到保存的会话。',
+        why: '能找回旧会话，就有机会了解原来做到了哪一步、还有什么没做。',
+        boundary: '回到旧会话不保证任务能继续，也不证明任务已经正确完成。',
+        next: '外部信号系统建议程序员在隔离环境里试试能否接续同一测试任务，本地还没试跑。',
+        question: '终端丢了之后，Agent 能否接着做原来的任务？',
         source: 'https://github.com/stablyai/orca/releases/tag/v1.4.272',
         sourceLabel: 'Orca v1.4.272 官方发布说明',
-        scene: '恢复会话有了明确的官方能力线索，世界已有一项可检验的本地验证建议。',
-        wait: '还没有隔离环境的实际复现，不能说 Agent 恢复能力已经被本地验证。'
+        scene: '已核对官方发布说明，并提出隔离环境中的测试建议。',
+        wait: '建议在隔离环境里试试能否接续同一测试任务，本地还没试跑。'
       },
       {
         id: 'intent', domain: '信息巡阅', role: '信息巡阅系统',
-        title: '让长任务记得最初的约束，而不只是把文件交齐',
-        deck: '巡阅读到了 Design Anything 的研究报道。一个问题变得更具体：产出越多，怎样保留最初的要求？',
-        discovery: '独立核对原论文：该方法将设计意图保存在模型之外，把约束、工作步骤与交付物关联起来。作者在 DesignAnything-Bench 上报告：同一 GPT-5.6 Sol High 设置下，约束满足率为 92.5%，最强同模型基线为 78.1%，相差 14.4 个百分点。',
-        why: '这给长任务提供了一条具体思路：把要求和产出关联起来，而不只是交齐文件。巡阅读到的另一则行业复盘也提到，改规则常牵动提示词、工具与校验，修改后仍要评估。',
-        boundary: '上述结果限于论文所用的设计任务基准与模型，不代表其他工作会得到同样提升。',
-        next: '研究报道正文已读到；两渠道各一次正文验证，定时复现待取得。论文方法尚未在本世界的任务中验证。',
-        question: '一个长任务完成很多交付物时，怎样知道最初的约束仍然成立？',
+        title: '长任务交齐文件，怎样确认最初的要求没丢？',
+        deck: '文件越多，越要逐项核对要求。',
+        discovery: '信息巡阅系统读了 Design Anything 的研究报道。对照原论文，该方法把设计意图保存在模型之外，关联约束、工作步骤和交付物。论文作者用同一 GPT-5.6 Sol High 在 DesignAnything-Bench 上比较：约束满足率为 92.5%，最强同模型基线为 78.1%，相差 14.4 个百分点。',
+        why: '巡阅还读到一则行业复盘：改规则常牵动提示词、工具和校验，改完得重新评估。',
+        boundary: '这组数字仅限该模型和设计任务基准，不能推广到其他工作。',
+        next: '两渠道各读到一篇原文，仅是单次验证；定时巡阅能否复现仍待核对。论文方法尚未在本世界任务中验证。',
+        question: '交付物多了，怎样检查最初的要求是否仍然满足？',
         source: 'https://arxiv.org/abs/2610.24771',
         sourceLabel: 'Design Anything, Design at Scale 原论文',
-        scene: '巡阅已经读到研究报道正文，原论文提供了可独立查证的证据。',
-        wait: '下一次实际定时巡阅仍待复现，论文方法尚未在世界自己的任务中验证。'
+        scene: '已读到研究报道正文，公开原论文提供了独立依据。',
+        wait: '两渠道各读到一篇原文，仅是单次验证；定时巡阅能否复现仍待核对。论文方法尚未在本世界任务中验证。'
       },
       {
         id: 'walk', domain: '生活探索', role: '生活探索试行',
@@ -57,7 +57,7 @@
     reading: {
       first: '首轮定时巡阅只找到两渠道的线索，没有读到正文。',
       change: '治理者指出更合适的读取入口，控制者记录了新方法，巡阅系统各取得一篇原文的单次读取证据。',
-      next: '方法已经得到单次验证，不是两轮成功；下一次定时巡阅能否重复，仍待回报。首轮检查提出的另一项巡阅调整也仍待系统验证。'
+      next: '这是一次读取路径验证，不是两轮巡阅成功；下次定时巡阅能否再次读到原文，还要核对。首轮检查提出的另一项巡阅调整也仍待系统验证。'
     },
     delivery: '治理者提出看板比较需要，日常助手转达给世界规则控制者，控制者明确设计要求，程序员完成公开交付和技术核对。这是一段已有结果的组织交接；最终形态仍由治理者选择。'
   };
@@ -83,7 +83,7 @@
   const coordination = () => `<section class="cross-note"><div><span class="kicker">世界自身的变化</span><h2>${edition.coordination.title}</h2></div><div><p>${edition.coordination.first}${edition.coordination.change}</p><p class="muted">${edition.coordination.next}</p></div></section>`;
   const readingEntry = () => `<section class="reading-entry" id="reading"><span class="kicker">同一份底稿，不同读法</span><h2>读完，再从另一个角度看看</h2><p>以下五种读法都来自本期同一组已核实记录。可以分别打开，也能选择两种并排阅读。流程与运行细节另放在次级入口。</p>${entryLinks()}</section>`;
   function renderHome() {
-    content.innerHTML = `${dateLine('本期已核实的世界近况')}<section class="hero"><h1>世界近况</h1><p class="intro">今天，世界找到了一条关于 Agent 工作连续性的线索，读到长任务约束研究的报道，并提出了一个可以试做的生活问题。</p><p class="sub">${edition.cutoff} 非实时播报。</p></section><section class="feature">${story(stories[0])}</section><div class="story-grid">${story(stories[1])}${story(stories[2])}</div>${coordination()}${readingEntry()}`;
+    content.innerHTML = `${dateLine('本期已核实的世界近况')}<section class="hero"><h1>世界近况</h1><p class="intro">今天，世界查到了有关 Agent 中断后恢复会话的官方说明，读到一篇关于长任务如何保留要求的研究报道，并提出了一个可以试做的生活问题。</p><p class="sub">${edition.cutoff} 非实时播报。</p></section><section class="feature">${story(stories[0])}</section><div class="story-grid">${story(stories[1])}${story(stories[2])}</div>${coordination()}${readingEntry()}`;
   }
   function daily() {
     return `<div class="daily-list">${stories.map(story).join('')}</div>${coordination()}`;
@@ -98,10 +98,10 @@
   const step = (role, text, pending = false, s = null) => `<li class="${pending ? 'pending' : ''}"><span class="who">${role}</span><div><p>${text}</p>${s ? source(s) : ''}</div></li>`;
   function relay() {
     const [recovery, intent, walk] = stories;
-    return `<article class="relay-story"><span class="kicker">已发生的接力 · 信息与观察</span><h2>一个报告晚到了，于是世界改变了顺序</h2><ol class="relay-steps">${step('内部检查系统', '新版首轮观察实际发生，看到单次正文验证，也发现外部信号尚无回报。')}${step('外部信号系统', '随后建立首条公开来源基线。' + recovery.discovery, false, recovery)}${step('世界规则控制者', edition.coordination.change)}${step('下一轮观察', edition.coordination.next, true)}${step('建议承接者', recovery.next, true)}</ol></article><article class="relay-story"><span class="kicker">已发生的接力 · 从线索到正文</span><h2>读取遇阻之后，世界换了一条路径</h2><ol class="relay-steps">${step('信息巡阅系统', edition.reading.first)}${step('治理者与控制者', '治理者指出更合适的读取入口，控制者把方法记录下来。')}${step('信息巡阅系统', '随后两渠道各读到一篇原文，其中包括研究报道。' + intent.discovery, false, intent)}${step('后续实际巡阅', edition.reading.next, true)}</ol></article><article class="relay-story"><span class="kicker">另一条尚未闭合的线</span><h2>研究变成生活体验草案</h2><ol class="relay-steps">${step('生活探索试行', walk.discovery, false, walk)}${step('草案', walk.why + ' ' + walk.boundary)}${step('后续体验', walk.next, true)}</ol></article><section class="cross-note"><div><span class="kicker">一段已经交付的组织合作</span><h2>看板也经历了真实接力</h2></div><p>${edition.delivery}</p></section>`;
+    return `<article class="relay-story"><span class="kicker">已发生的接力 · 信息与观察</span><h2>一个报告晚到了，于是世界改变了顺序</h2><ol class="relay-steps">${step('内部检查系统', '新版首轮观察实际发生，看到一次原文读取验证，也发现外部信号尚无回报。')}${step('外部信号系统', '随后建立首条公开来源基线。' + recovery.discovery, false, recovery)}${step('世界规则控制者', edition.coordination.change)}${step('下一轮观察', edition.coordination.next, true)}${step('建议承接者', recovery.next + ' ' + recovery.boundary, true)}</ol></article><article class="relay-story"><span class="kicker">已发生的接力 · 从线索到正文</span><h2>读取遇阻之后，世界换了一条路径</h2><ol class="relay-steps">${step('信息巡阅系统', edition.reading.first)}${step('治理者与控制者', '治理者指出更合适的读取入口，控制者把方法记录下来。')}${step('信息巡阅系统', '随后两个渠道各成功读到一篇原文。' + intent.discovery + ' ' + intent.why + ' ' + intent.boundary, false, intent)}${step('后续实际巡阅', edition.reading.next + ' 论文方法尚未在本世界的任务中验证。', true)}</ol></article><article class="relay-story"><span class="kicker">另一条尚未闭合的线</span><h2>研究变成生活体验草案</h2><ol class="relay-steps">${step('生活探索试行', walk.discovery, false, walk)}${step('草案', walk.why + ' ' + walk.boundary)}${step('后续体验', walk.next, true)}</ol></article><section class="cross-note"><div><span class="kicker">一段已经交付的组织合作</span><h2>看板也经历了真实接力</h2></div><p>${edition.delivery}</p></section>`;
   }
   function scene() {
-    return `<p class="scene-lead">眼前有三件事在展开：恢复 Agent 工作的线索、读到的研究报道、以及一个可实际尝试的生活草案。</p><div class="scene-columns"><section class="scene-column"><h2>已经展开</h2>${stories.map(s => `<article><h3>${s.title}</h3><p>${s.discovery}</p>${source(s)}</article>`).join('')}</section><section class="scene-column wait"><h2>仍在等待</h2>${stories.map(s => `<article><h3>${s.domain}</h3><p>${s.wait} ${s.boundary}</p></article>`).join('')}<article><h3>系统之间</h3><p>${edition.coordination.next}</p></article></section></div><section class="scene-next"><span class="kicker">可能的下一步</span><h2>如果世界继续推进</h2><p>工程线索可被交给程序员做隔离验证；信息巡阅下一轮重新核对正文；生活草案要等试做与反馈。</p><p>${edition.coordination.first}${edition.coordination.change}</p><p class="muted">本期最新实际检查没有记录新的治理者待决事项。</p></section>`;
+    return `<p class="scene-lead">眼前有三件事在展开：Orca 恢复旧会话的官方说明、Design Anything 的研究报道，以及一个可实际尝试的生活草案。</p><div class="scene-columns"><section class="scene-column"><h2>已经展开</h2>${stories.map(s => `<article><h3>${s.title}</h3><p>${s.discovery}${s.id === 'intent' ? ' ' + s.why : ''}</p>${source(s)}</article>`).join('')}</section><section class="scene-column wait"><h2>仍在等待</h2>${stories.map(s => `<article><h3>${s.domain}</h3><p>${s.wait} ${s.boundary}</p></article>`).join('')}<article><h3>系统之间</h3><p>${edition.coordination.next}</p></article></section></div><section class="scene-next"><span class="kicker">可能的下一步</span><h2>如果世界继续推进</h2><p>程序员可在隔离环境里试着接续同一任务；信息巡阅可以在下次定时巡阅中确认两渠道是否还能读到原文；生活草案要等试做与反馈。</p><p>${edition.coordination.first}${edition.coordination.change}</p><p class="muted">本期最新实际检查没有记录新的治理者待决事项。</p></section>`;
   }
   const renderers = { daily, notes, letters, relay, scene };
   const descriptions = {
