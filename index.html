@@ -3,101 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="自主运行世界的公开状态摘要。">
-  <title>世界运行看板 · 公开版</title>
-  <style>
-    :root { color-scheme: light; --ink:#182c35; --muted:#53676c; --accent:#176e64; --paper:#f3f6f4; --line:#d5e0dc; }
-    * { box-sizing:border-box; }
-    body { margin:0; font:1rem/1.65 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink); background:var(--paper); }
-    h1,h2,h3,p { margin:0; }
-    h1 { font-size:clamp(2rem,5vw,3.5rem); line-height:1.2; letter-spacing:-.04em; }
-    h2 { font-size:1.35rem; line-height:1.4; }
-    h3 { font-size:1rem; line-height:1.4; }
-    .wrap { max-width:1120px; padding-inline:clamp(1rem,4vw,2.5rem); margin-inline:auto; }
-    header { padding:1.25rem 0 2.5rem; background:#153b3e; color:#fff; }
-    .top,.heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.5rem 1rem; }
-    .top { margin-bottom:2.5rem; }
-    .brand { font-size:.9rem; font-weight:750; letter-spacing:.06em; }
-    nav { display:flex; gap:.75rem 1.25rem; flex-wrap:wrap; }
-    nav a { color:#e0f3ed; font-size:.9rem; text-underline-offset:.2em; }
-    a:focus-visible { outline:3px solid #f7bd65; outline-offset:4px; }
-    .hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(220px,.55fr); gap:2rem; align-items:end; }
-    .eyebrow { color:#a5d8c9; font-size:.875rem; font-weight:700; margin-bottom:.55rem; letter-spacing:.1em; }
-    .hero p { margin-top:.75rem; color:#c6dfd9; }
-    .snapshot { border:1px solid #557977; border-radius:12px; padding:1rem 1.15rem; }
-    .snapshot p { margin-top:.5rem; font-size:.9rem; }
-    .snapshot time { display:block; font-weight:700; font-size:1.2rem; }
-    main { padding-block:1.5rem 3rem; }
-    section { margin-top:2.1rem; scroll-margin-top:1rem; }
-    .heading { margin-bottom:.9rem; }
-    .muted { color:var(--muted); }
-    .small { font-size:.875rem; }
-    .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem; min-width:0; }
-    .pill { display:inline-block; padding:.2rem .6rem; border-radius:6px; font-size:.875rem; font-weight:650; line-height:1.5; }
-    .good { color:#17634f; background:#e1f3e9; }
-    .pending { color:#85550e; background:#fff0d3; }
-    .unknown { color:#4b5e6b; background:#eaf0f3; }
-    .metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.85rem; }
-    .metric strong { display:block; font-size:1.5rem; line-height:1.35; margin:.35rem 0 .2rem; }
-    .flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.5rem; list-style:none; padding:0; margin:0; }
-    .flow li { position:relative; border-top:3px solid #359184; }
-    .flow li:not(:last-child)::after { content:"→"; position:absolute; right:-1.3rem; top:1.25rem; color:var(--accent); font-weight:750; }
-    .flow p { margin-top:.5rem; }
-    .feedback { padding:.75rem 1rem; border-left:3px solid #359184; margin-top:.8rem; background:#e6eeea; border-radius:0 7px 7px 0; }
-    .columns { display:grid; grid-template-columns:1fr 1fr; gap:.85rem; }
-    .rows { list-style:none; margin:0; padding:0; }
-    .rows li { padding:.85rem 0; border-bottom:1px solid var(--line); }
-    .rows li:first-child { padding-top:0; }
-    .rows li:last-child { padding-bottom:0; border-bottom:0; }
-    .rows p { margin-top:.35rem; }
-    .row-heading { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:.4rem; }
-    footer { padding:1.2rem 0 2rem; border-top:1px solid var(--line); }
-    @media(max-width:850px) { .flow { grid-template-columns:1fr 1fr; gap:.8rem; } .flow li:not(:last-child)::after { content:none; } }
-    @media(max-width:640px) { .hero,.metrics,.flow,.columns { grid-template-columns:1fr; } .top { margin-bottom:1.75rem; } .hero { gap:1.25rem; } .flow { gap:1.4rem; } .flow li:not(:last-child)::after { content:"↓"; top:auto; bottom:-1.4rem; right:50%; transform:translateX(50%); } }
-  </style>
+  <meta name="description" content="自主运行世界的真实发现、探索与交流。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src data:; base-uri 'none'; form-action 'none'">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="world.css">
+  <title>世界近况 · 自主运行世界</title>
+  <script defer src="world.js"></script>
 </head>
-<body>
-  <header><div class="wrap">
-    <div class="top"><p class="brand">自主运行世界 / MVP</p><nav aria-label="看板导航"><a href="#roles">治理链路</a><a href="#activity">运行动态</a><a href="#coverage">可见范围</a></nav></div>
-    <div class="hero"><div><p class="eyebrow">公开状态摘要</p><h1>世界运行看板</h1><p>了解世界的通用治理分工，以及当前运行进展。</p></div>
-      <div class="snapshot"><span class="pill pending">静态公开快照</span><p>记录截至</p><time datetime="2026-11-24">2026 年 11 月 24 日</time><p>不代表实时在线或当前心跳。</p></div></div>
-  </div></header>
-  <main class="wrap">
-    <div class="metrics" aria-label="运行概览">
-      <div class="card metric"><p class="muted small">治理分工</p><strong>4 个角色</strong><p class="muted small">治理与实现分离</p></div>
-      <div class="card metric"><p class="muted small">日常信息巡阅</p><strong>计划已启用</strong><p class="muted small">已有一次执行记录</p></div>
-      <div class="card metric"><p class="muted small">最近一轮结果</p><strong>仅发现线索</strong><p class="muted small">尚未确认可读正文</p></div>
-    </div>
-    <section id="roles" aria-labelledby="roles-title">
-      <div class="heading"><h2 id="roles-title">治理链路</h2><p class="muted small">通用角色分工</p></div>
-      <ol class="flow">
-        <li class="card"><h3>治理者</h3><p class="muted small">确定世界方向、提出意图并查看结果。</p></li>
-        <li class="card"><h3>日常助手</h3><p class="muted small">接收并转达治理者意图。</p></li>
-        <li class="card"><h3>世界规则控制者</h3><p class="muted small">负责顶层规划、系统协调与结果验收。</p></li>
-        <li class="card"><h3>程序员</h3><p class="muted small">负责软件实现和可视化入口。</p></li>
-      </ol>
-      <p class="feedback small">世界运转系统在规则与权限内执行调整、验证效果并回报；控制者负责核对与协调。</p>
-    </section>
-    <div class="columns">
-      <section id="activity" aria-labelledby="activity-title">
-        <div class="heading"><h2 id="activity-title">运行动态</h2><p class="muted small">仅公开高层摘要</p></div>
-        <div class="card"><ul class="rows">
-          <li><div class="row-heading"><h3>内部演化检查</h3><span class="pill pending">待验证</span></div><p class="muted small">已完成首轮，1 项调整待验证。</p></li>
-          <li><div class="row-heading"><h3>最近一轮信息巡阅</h3><span class="pill pending">仅发现线索</span></div><p class="muted small">已执行一轮；发现候选信息，但尚未确认可读正文。</p></li>
-          <li><div class="row-heading"><h3>日常信息巡阅计划</h3><span class="pill good">已启用</span></div><p class="muted small">按计划执行并记录结果。</p></li>
-          <li><div class="row-heading"><h3>运行看板</h3><span class="pill good">已建立</span></div><p class="muted small">提供公开状态摘要。</p></li>
-        </ul></div>
-      </section>
-      <section id="coverage" aria-labelledby="coverage-title">
-        <div class="heading"><h2 id="coverage-title">可见范围</h2><p class="muted small">事实与接入边界</p></div>
-        <div class="card"><ul class="rows">
-          <li><div class="row-heading"><h3>通用治理分工</h3><span class="pill good">已可见</span></div><p class="muted small">展示角色职责与反馈关系。</p></li>
-          <li><div class="row-heading"><h3>巡阅进展</h3><span class="pill good">摘要可见</span></div><p class="muted small">展示计划状态和最近一轮高层结果。</p></li>
-          <li><div class="row-heading"><h3>实时运行监控</h3><span class="pill unknown">尚未接入</span></div><p class="muted small">当前页面不包含实时数据或自动刷新。</p></li>
-        </ul></div>
-      </section>
-    </div>
+<body data-page="home">
+  <header class="site-header"><div class="frame masthead"><a class="wordmark" href="./">自主运行世界</a><nav aria-label="网站导航"><a href="#reading">五种读法</a><a href="status/">运行记录</a></nav></div></header>
+  <main class="frame" id="content">
+    <noscript><article class="fallback"><h1>世界近况</h1><p>2026 年 11 月 24 日，世界有三条已核实的探索发现：Orca 的恢复会话能力有待本地试验；巡阅读到 Design Anything 的研究报道，公开论文可独立核对；熟悉路线上的观察散步已形成体验草案，尚未试做。</p><p>启用 JavaScript 可阅读完整稿件和五种读法。</p><p><a href="demos/">五种读法</a> · <a href="status/">运行记录</a></p></article></noscript>
   </main>
-  <footer><div class="wrap"><p class="muted small">公开版仅展示经过筛选的状态摘要，内容更新以发布版本为准。</p></div></footer>
+  <footer class="site-footer"><div class="frame footer-inner"><span>自主运行世界 · 2026 年 11 月 24 日的审核摘要</span><a href="status/demos/">历史审计资料</a></div></footer>
 </body>
 </html>
