@@ -4,6 +4,29 @@
   const edition = {
     date: '2026 年 11 月 24 日',
     cutoff: '截止于当日外部信号基线、观察顺序调整及生活探索草案完成阶段。',
+    experiment: {
+      title: '世界加速实验：查深一条线索，然后暂缓',
+      intro: '这次有限实验从一条已知的免费展讯开始，六轮内部复盘用时 53 分 05 秒。我们想看的是，系统能否自己做查证和筛选，把决定留给人，让参与者少花时间在准备上。',
+      before: '展讯的免费与展期已经知道，散客入馆条件没有讲清。',
+      after: '补查后知道，上海博物馆东馆散客通常免预约，入馆需持有效证件原件。特展是否另有要求、到访当天是否限流，仍待确认。参观卡暂缓，线索保留为有条件的备选。',
+      rounds: [
+        '控制者派发来源核对。展讯说明免费和展期，没讲清散客入馆条件。第一次复盘建议去查馆方到访须知。',
+        '补查后，复盘明确了通用条件和特展的不确定项，保留这条线索供选择。',
+        '巡阅系统根据已知情况自行暂缓制作参观卡。出现参观意向或馆方新通知，再查专项条件。定时复盘接住了这个决定。',
+        '外部信号系统沿用已有来源。两个系统的判断一致，查证依据只计一组。',
+        '没有新的来源回报或反馈交接。系统保留暂缓决定及重开条件。',
+        '最后一轮核对过程、分工和状态记录，确认这一窗口只深入了一条线索，实际使用和节时仍待反馈。'
+      ],
+      evaluations: [
+        { name: '与目标的一致程度', text: '查证与筛选交给了系统，后半程由角色自行判断。实际少做了多少准备，仍待使用反馈。' },
+        { name: '深度', text: '找到另一份官方依据，补齐了一个影响准备的条件。' },
+        { name: '广度', text: '实质查证始终围绕一条参观线索，暂停后没有打开第二个方向。' },
+        { name: '时间线', text: '能从原线索追到补查、暂停及复核，区分前段派发与后段定时运行。' },
+        { name: '过程', text: '角色能靠文件接续先前的判断，交流由任务、排程和回报触发。角色自行发起新合作，以及换环境后完整恢复世界状态，仍待验证。' }
+      ],
+      source: 'https://www.shanghaimuseum.cn/mu/frontend/pg/m/service/visit-east',
+      sourceLabel: '馆方到访须知'
+    },
     stories: [
       {
         id: 'recover', domain: '工程探索', role: '外部信号系统',
@@ -82,8 +105,12 @@
   const story = s => `<article class="story" aria-label="${s.title}"><div><span class="kicker">${s.domain} · ${s.role}</span><h2>${s.title}</h2></div><p class="deck">${s.deck}</p><p>${s.discovery}</p><p>${s.why}</p>${stage(s.next, s.boundary)}${source(s)}</article>`;
   const coordination = () => `<section class="cross-note"><div><span class="kicker">世界自身的变化</span><h2>${edition.coordination.title}</h2></div><div><p>${edition.coordination.first}${edition.coordination.change}</p><p class="muted">${edition.coordination.next}</p></div></section>`;
   const readingEntry = () => `<section class="reading-entry" id="reading"><span class="kicker">同一份底稿，不同读法</span><h2>读完，再从另一个角度看看</h2><p>以下五种读法都来自本期同一组已核实记录。可以分别打开，也能选择两种并排阅读。流程与运行细节另放在次级入口。</p>${entryLinks()}</section>`;
+  function experimentNote() {
+    const e = edition.experiment;
+    return `<section class="relay-story" id="experiment-notes" aria-labelledby="experiment-notes-title"><span class="kicker">本期追加札记 · ${edition.date} · 采样已结束</span><h2 id="experiment-notes-title">${e.title}</h2><p>${e.intro}</p><div class="scene-columns"><section class="scene-column"><h2>推进前</h2><p>${e.before}</p></section><section class="scene-column"><h2>推进后</h2><p>${e.after}</p><p class="source"><a href="${e.source}" target="_blank" rel="noopener noreferrer">公开依据：${e.sourceLabel}</a></p></section></div><h3>六轮里实际发生了什么</h3><ol class="relay-steps" aria-label="实验六轮时间线">${e.rounds.map((text, i) => `<li><span class="who">第 ${i + 1} 轮</span><div><p>${text}</p></div></li>`).join('')}</ol><h3>六轮之后，世界有什么变化？</h3><div class="note-sections">${e.evaluations.map(item => `<section><h3>${item.name}</h3><p>${item.text}</p></section>`).join('')}</div></section>`;
+  }
   function renderHome() {
-    content.innerHTML = `${dateLine('本期已核实的世界近况')}<section class="hero"><h1>世界近况</h1><p class="intro">今天，世界查到了有关 Agent 中断后恢复会话的官方说明，读到一篇关于长任务如何保留要求的研究报道，并提出了一个可以试做的生活问题。</p><p class="sub">${edition.cutoff} 非实时播报。</p></section><section class="feature">${story(stories[0])}</section><div class="story-grid">${story(stories[1])}${story(stories[2])}</div>${coordination()}${readingEntry()}`;
+    content.innerHTML = `${dateLine('本期已核实的世界近况')}<section class="hero"><h1>世界近况</h1><p class="intro">今天，世界查到了有关 Agent 中断后恢复会话的官方说明，读到一篇关于长任务如何保留要求的研究报道，并提出了一个可以试做的生活问题。</p><p class="sub">常规稿件${edition.cutoff} 加速实验札记为当日追加记录。非实时播报。</p></section>${experimentNote()}<section class="feature">${story(stories[0])}</section><div class="story-grid">${story(stories[1])}${story(stories[2])}</div>${coordination()}${readingEntry()}`;
   }
   function daily() {
     return `<div class="daily-list">${stories.map(story).join('')}</div>${coordination()}`;
